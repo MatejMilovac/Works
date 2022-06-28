@@ -1,0 +1,82 @@
+import 'package:flutter/material.dart';
+void main() {
+  runApp(MaterialApp(
+    home: Home(),
+  )
+  );
+}
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+class _HomeState extends State<Home> {
+  TextEditingController num1 = new TextEditingController();
+  TextEditingController num2 = new TextEditingController();
+  String opseg ='0';
+  String povrsina ='0';
+  String result ='0';
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Zbrajanje dva broja'),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            // Polje za unos prvog broja
+            Padding(padding: EdgeInsets.all(20),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Unesite vrijednost prve stranice',
+                  hintText: 'Unesite prvi broj',
+                ),
+                controller: num1,
+              ),
+            ),
+            //Polje za unos drugog broja
+            Padding(padding: EdgeInsets.all(20),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Unesite vrijednost druge stranice',
+                  hintText: 'Unesite drugi broj',
+                ),
+                controller: num2,
+              ),
+            ),
+            RaisedButton(
+              color: Colors.blue,
+              child: Text('Izracunaj opseg i povrsinu'),
+              onPressed: (){
+                setState((){
+                  int sum = 2 * int.parse(num1.text) + 2 * int.parse(num2.text);
+                  opseg = sum.toString();
+                  int sum1 = int.parse(num1.text) * int.parse(num2.text);
+                  povrsina = sum1.toString();
+                });
+              },
+            ),
+            SizedBox(height: 15),
+            new Text(opseg,
+              style: TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),),
+            SizedBox(height: 15),
+            new Text(povrsina,
+              style: TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),),
+          ],
+        ),
+      ),
+    );
+  }
+}
